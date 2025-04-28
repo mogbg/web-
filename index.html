@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Excel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #dae2f8, #d6a4a4);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    label {
+      font-size: 18px;
+      color: #555;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.3);
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body> 
+  <h1>Bienvenido</h1>  
+
+  <form id="formulario">
+    <label for="descripcion">
+      Programa encargado de buscar información por medio de placas
+    </label><br><br>
+
+    <label>
+      <input type="radio" name="entrega" value="Rastrear por placas"> Rastrear por placas
+    </label><br><br>
+
+    <button type="button" id="boton">Iniciar</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
