@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar placa en Excel</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -33,7 +32,6 @@
       text-align: center;
     }
 
-    input[type="file"],
     input[type="text"] {
       width: 80%;
       padding: 10px;
@@ -45,9 +43,7 @@
       transition: 0.3s;
     }
 
-    input[type="file"]:hover,
     input[type="text"]:hover,
-    input[type="file"]:focus,
     input[type="text"]:focus {
       border-color: #4CAF50;
     }
@@ -102,32 +98,25 @@
   </style>
 </head>
 <body>
-    <h1>Buscar Placas en Archivo Excel</h1>
-    
-    <input type="file" id="fileInput" accept=".xlsx, .xls" />
-    <br><br>
-    
+
+    <h1>Buscar Placa</h1>
+
     <input type="text" id="nameToSearch" placeholder="Ingresa la placa a buscar" />
     <button onclick="searchName()">Buscar</button>
-    <br><br>
 
     <div id="result"></div>
+    
+<button onclick="window.location.href='index.html'">Regresar al Inicio</button>
 
     <script>
-        let excelData = [];
-
-        function handleFile(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: "array" });
-                const sheetName = workbook.SheetNames[0];
-                const sheet = workbook.Sheets[sheetName];
-                excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-                console.log(excelData); // Para depurar
-            };
-            reader.readAsArrayBuffer(file);
-        }
+      window.onload = function() {
+    const storedData = localStorage.getItem('excelData');
+    if (storedData) {
+        excelData = JSON.parse(storedData); // Recuperamos los datos almacenados
+    } else {
+        alert('No se ha encontrado un archivo Excel guardado. Ve a mantenimiento y sube uno.');
+    }
+};
 
         function searchName() {
             const nameToSearch = document.getElementById('nameToSearch').value.trim().toLowerCase();
@@ -145,14 +134,12 @@
                 const row = excelData[i];
                 for (let j = 0; j < row.length; j++) {
                     if (row[j] && row[j].toString().toLowerCase() === nameToSearch) {
-                        // Obtenemos la celda anterior y las 4 siguientes
                         const cellsToShow = [];
                         for (let k = -1; k <= 4; k++) {
                             const cell = row[j + k] !== undefined ? row[j + k] : '[Vacío]';
                             cellsToShow.push(cell);
                         }
 
-                        // Mostramos el resultado en tabla
                         let tableHTML = `
                             <table>
                                 <tr>
@@ -181,13 +168,7 @@
                 resultDiv.innerHTML = 'Placa no encontrada en el archivo.';
             }
         }
-
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                handleFile(file);
-            }
-        });
     </script>
+
 </body>
 </html>

@@ -1,6 +1,4 @@
 document.getElementById("boton").addEventListener("click", function() {
-    
-  
     let metododebusqueda = document.querySelector('input[name="entrega"]:checked')?.value;
 
     if (!metododebusqueda) {
@@ -14,5 +12,7 @@ document.getElementById("boton").addEventListener("click", function() {
         window.location.href = "nombre.html";
     } else if (metododebusqueda === "Rastrear por placas") {
         window.location.href = "placa.html";
+    } else if (metododebusqueda === "Mantenimiento") {
+        window.location.href = "mantenimiento.html";
     }
 });
